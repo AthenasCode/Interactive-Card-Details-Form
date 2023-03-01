@@ -3,7 +3,6 @@
 html {
   font-family: "Space Grotesk", sans-serif;
   font-size: 18px;
-  letter-spacing: 2px;
 }
 
 .App {
@@ -60,10 +59,31 @@ body {
   background-size: 100% 100%;
 }
 
+#cardfront {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("./images/bg-card-front.png");
+}
+
+#cardback {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("./images/bg-card-back.png");
+}
+
 input {
   border: solid 1px hsl(270, 3%, 87%);
   border-radius: 6px;
   padding: 10px;
-  margin: 2px 0px 15px 0px;
-  color: hsl(279, 6%, 55%);
+  margin: 2px 0px 20px 0px;
+  font-size: 18px;
+}
+
+label {
+  color: hsl(278, 68%, 11%);
+  font-size: 15px;
+}
+
+#submit-btn {
+  color: white;
 }
