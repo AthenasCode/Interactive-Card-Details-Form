@@ -1,16 +1,46 @@
-export default function Form({ setCard, card }) {
-  const handleNameChange = (e) => {
-    setCard({
-      ...card,
-      name: e.target.value,
-    });
+export default function Form({ setCard, card, thankYou, setThankYou }) {
+  const handleChange = (e) => {
+    console.log(e.target.id);
+    switch (e.target.id) {
+      case "name":
+        setCard({
+          ...card,
+          name: e.target.value,
+        });
+        break;
+      case "number":
+        setCard({
+          ...card,
+          number: e.target.value,
+        });
+        break;
+      case "month":
+        setCard({
+          ...card,
+          month: e.target.value,
+        });
+        break;
+      case "year":
+        setCard({
+          ...card,
+          year: e.target.value,
+        });
+        break;
+      case "cvc":
+        setCard({
+          ...card,
+          cvc: e.target.value,
+        });
+        break;
+      default:
+        console.log("error: default switch");
+        break;
+    }
   };
 
-  const handleNumberChange = (e) => {
-    setCard({
-      ...card,
-      number: e.target.value,
-    });
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setThankYou(!thankYou);
   };
 
   return (
@@ -20,11 +50,12 @@ export default function Form({ setCard, card }) {
           CARDHOLDER NAME
           <br />
           <input
+            id="name"
             className="w-full"
             type="text"
             name="name"
             placeholder="e.g. Jane Appleseed"
-            onChange={handleNameChange}
+            onChange={handleChange}
           />
         </label>
 
@@ -33,10 +64,11 @@ export default function Form({ setCard, card }) {
           <br />
           <input
             className="w-full"
+            id="number"
             type="text"
             name="number"
             placeholder="e.g. 1234 5678 9123 0000"
-            onChange={handleNumberChange}
+            onChange={handleChange}
           />
         </label>
         <div className="flex mb-5">
@@ -48,6 +80,7 @@ export default function Form({ setCard, card }) {
               name="date"
               id="month"
               placeholder="MM"
+              onChange={handleChange}
             />
             <input
               className="mr-5 w-20"
@@ -55,12 +88,19 @@ export default function Form({ setCard, card }) {
               name="date"
               id="year"
               placeholder="YY"
+              onChange={handleChange}
             />
           </label>
 
           <label htmlFor="CVC">
             CVC <br />
-            <input type="text" name="CVC" placeholder="e.g. 123" />
+            <input
+              type="text"
+              id="cvc"
+              name="CVC"
+              placeholder="e.g. 123"
+              onChange={handleChange}
+            />
           </label>
         </div>
 
@@ -68,6 +108,7 @@ export default function Form({ setCard, card }) {
           type="submit"
           id="submit-btn"
           className="bg-dark-violet rounded-md py-2"
+          onClick={onSubmit}
         >
           Confirm
         </button>
