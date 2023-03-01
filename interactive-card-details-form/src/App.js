@@ -30,7 +30,7 @@ function App() {
 
         <div id="background-img" className="col-start-1 col-end-2"></div>
         <div className="col-start-2 col-end-4 h-full flex flex-col justify-center items-center">
-          <Form cardNumber={card} setCardNumber={setCard} />
+          <Form card={card} setCard={setCard} />
         </div>
       </div>
     </>

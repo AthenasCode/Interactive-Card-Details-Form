@@ -1,4 +1,18 @@
-export default function Form() {
+export default function Form({ setCard, card }) {
+  const handleNameChange = (e) => {
+    setCard({
+      ...card,
+      name: e.target.value,
+    });
+  };
+
+  const handleNumberChange = (e) => {
+    setCard({
+      ...card,
+      number: e.target.value,
+    });
+  };
+
   return (
     <div>
       <form className="flex flex-col">
@@ -10,6 +24,7 @@ export default function Form() {
             type="text"
             name="name"
             placeholder="e.g. Jane Appleseed"
+            onChange={handleNameChange}
           />
         </label>
 
@@ -21,6 +36,7 @@ export default function Form() {
             type="text"
             name="number"
             placeholder="e.g. 1234 5678 9123 0000"
+            onChange={handleNumberChange}
           />
         </label>
         <div className="flex mb-5">
