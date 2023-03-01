@@ -41,6 +41,11 @@ export default function Form({ setCard, card, thankYou, setThankYou }) {
   const onSubmit = (e) => {
     e.preventDefault();
     setThankYou(!thankYou);
+
+    //Error messages onSubmit:
+    //Any input field is empty
+
+    //Card number, expiry date, or CVC fields are in the wrong format
   };
 
   return (
