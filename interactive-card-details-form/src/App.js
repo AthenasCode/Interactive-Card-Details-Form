@@ -1,9 +1,10 @@
 import "./App.css";
+import Form from "./components/form";
 
 function App() {
   return (
     <div className="h-full flex flex-col justify-center items-center">
-      <div>Hello</div>
+      <Form />
     </div>
   );
 }
