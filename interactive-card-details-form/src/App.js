@@ -5,11 +5,11 @@ import { useState } from "react";
 
 function App() {
   const [card, setCard] = useState({
-    number: "0000 0000 0000 0000",
-    name: "Jane Appleseed",
-    month: "00",
-    year: "00",
-    cvc: "000",
+    number: "",
+    name: "",
+    month: "",
+    year: "",
+    cvc: "",
   });
 
   const [thankYou, setThankYou] = useState(false);
@@ -21,17 +21,17 @@ function App() {
           className="absolute left-[17%] top-[23.5%] w-[447px] h-[245px]"
           id="cardfront"
         >
-          <div>{card.number}</div>
-          <div>{card.name}</div>
+          <div>{card.number ? card.number : "0000 0000 0000 0000"}</div>
+          <div>{card.name ? card.name : "Jane Appleseed"}</div>
           <div>
-            {card.month}/{card.year}
+            {card.month ? card.month : "00"}/{card.year ? card.year : "00"}
           </div>
         </div>
         <div
           id="cardback"
           className="absolute left-[25%] bottom-[23.5%] w-[447px] h-[245px]"
         >
-          <div>{card.cvc}</div>
+          <div>{card.cvc ? card.cvc : "000"}</div>
         </div>
 
         <div id="background-img" className="col-start-1 col-end-2"></div>

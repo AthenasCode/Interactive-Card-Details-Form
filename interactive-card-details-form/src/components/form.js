@@ -3,6 +3,7 @@ export default function Form({ setCard, card, thankYou, setThankYou }) {
     console.log(e.target.id);
     switch (e.target.id) {
       case "name":
+        console.log(e.target.value);
         setCard({
           ...card,
           name: e.target.value,
