@@ -49,12 +49,13 @@ export default function Form({
   const onSubmit = (e) => {
     e.preventDefault();
     let errorObj = {};
+
     //Error messages onSubmit:
     //I didn't use React Form or another library because I wanted to practice my problem solving skills.
-
     for (const [key, value] of Object.entries(card)) {
       //If any input field is empty
       if (!value) {
+        //switch could probably be tidied similarly to what I did for the formatting errors below.
         switch (key) {
           case "name":
             errorObj = { ...errorObj, name: true };
@@ -87,12 +88,25 @@ export default function Form({
     }
 
     //Card number, expiry date, or CVC fields are in the wrong format
-    //Numbers only
+    //Card number, month, year, and cvc should have numbers only
+    const numbersOnlyChecks = ["number", "month", "year", "cvc"];
+    let formatErrorObj = {};
+    const formatErrorDuplicate = { ...formatError };
+    numbersOnlyChecks.forEach((element) => {
+      if (!/^\d+$/.test(card[element]) && card[element]) {
+        formatErrorObj = { ...formatErrorObj, [element]: true };
+      }
+    });
+    console.log(formatErrorObj);
+    Object.assign(formatErrorDuplicate, formatErrorObj);
+    setFormatError(formatErrorDuplicate);
+
     //Valid date (e.g. month <= 12)
+
     //Restrict MM/YY to 2 digits, restrict CVC to 3 digits
   };
 
-  //apply conditional className if there is an error for a given input field
+  // Apply conditional className if there is an error for a given input field
   const errorConditionalStyling = (str) => {
     if (str) {
       return "border-solid border-red-error";
