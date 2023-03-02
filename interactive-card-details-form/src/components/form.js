@@ -160,6 +160,7 @@ export default function Form({
             name="number"
             placeholder="e.g. 1234 5678 9123 0000"
             onChange={handleChange}
+            maxLength="16"
           />
           {blankError.number && (
             <div className="mt-1 text-xs text-red-error">Can't be blank</div>
@@ -182,6 +183,7 @@ export default function Form({
               id="month"
               placeholder="MM"
               onChange={handleChange}
+              maxLength="2"
             />
             <input
               className={
@@ -192,6 +194,7 @@ export default function Form({
               id="year"
               placeholder="YY"
               onChange={handleChange}
+              maxLength="2"
             />
             {blankError.month || blankError.year ? (
               <div className="mt-1 text-xs text-red-error">Can't be blank</div>
@@ -217,6 +220,7 @@ export default function Form({
               name="CVC"
               placeholder="e.g. 123"
               onChange={handleChange}
+              maxLength="3"
             />
             {blankError.cvc && (
               <div className="mt-1 text-xs text-red-error">Can't be blank</div>
