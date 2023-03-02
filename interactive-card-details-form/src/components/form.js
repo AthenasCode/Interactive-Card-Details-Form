@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 export default function Form({
   setCard,
   card,
@@ -76,8 +78,7 @@ export default function Form({
     }
     //if there is an error and state needs to be updated to reflect that:
     if (errorObj) {
-      console.log("Error!");
-      let updatedErrorObj = { ...error }; //copy current state to avoid directly updating state without using the setError() function. Not sure if this is necessary but I thought it might be best practice.
+      let updatedErrorObj = { ...error }; //copy current state to avoid directly updating state without using the setError() function (best practice)
       Object.assign(updatedErrorObj, errorObj); //merge the errorObj with copied state (alternative is to change state here using Object.assign(error, errorObj)) - see prev comment
       setError(updatedErrorObj); //update state
     } else {
@@ -87,69 +88,85 @@ export default function Form({
     //Card number, expiry date, or CVC fields are in the wrong format
   };
 
+  //apply conditional className if there is an error for a given input field
+  const errorConditionalStyling = (str) => {
+    if (str) {
+      return "border-solid border-red-error";
+    }
+    return null;
+  };
+
   return (
-    <div>
-      <form className="flex flex-col">
+    <div className="w-[36.8%]">
+      <form className="h-full w-full min-w-full flex flex-col">
         <label htmlFor="name">
           CARDHOLDER NAME
           <br />
           <input
             id="name"
-            className="w-full"
+            className={errorConditionalStyling(error.name) + " w-full"}
             type="text"
             name="name"
             placeholder="e.g. Jane Appleseed"
             onChange={handleChange}
           />
-          {error.name && <div className="m-1">Can't be blank</div>}
+          {error.name && (
+            <div className="mt-1 text-xs text-red-error">Can't be blank</div>
+          )}
         </label>
 
         <label htmlFor="number">
           CARD NUMBER
           <br />
           <input
-            className="w-full"
+            className={errorConditionalStyling(error.number) + " w-full"}
             id="number"
             type="text"
             name="number"
             placeholder="e.g. 1234 5678 9123 0000"
             onChange={handleChange}
           />
-          {error.number && <div>Can't be blank</div>}
+          {error.number && (
+            <div className="mt-1 text-xs text-red-error">Can't be blank</div>
+          )}
         </label>
         <div className="flex mb-5">
           <label htmlFor="date">
             EXP. DATE (MM/YY) <br />
             <input
-              className="mr-2 w-20"
+              className={errorConditionalStyling(error.month) + " mr-2 w-20"}
               type="text"
               name="date"
               id="month"
               placeholder="MM"
               onChange={handleChange}
             />
-            {error.month && <div>Can't be blank</div>}
             <input
-              className="mr-5 w-20"
+              className={errorConditionalStyling(error.year) + " mr-5 w-20"}
               type="text"
               name="date"
               id="year"
               placeholder="YY"
               onChange={handleChange}
             />
-            {error.year && <div>Can't be blank</div>}
+            {error.month || error.year ? (
+              <div className="mt-1 text-xs text-red-error">Can't be blank</div>
+            ) : null}
           </label>
 
           <label htmlFor="CVC">
             CVC <br />
             <input
               type="text"
+              className={errorConditionalStyling(error.cvc)}
               id="cvc"
               name="CVC"
               placeholder="e.g. 123"
               onChange={handleChange}
             />
-            {error.cvc && <div>Can't be blank</div>}
+            {error.cvc && (
+              <div className="mt-1 text-xs text-red-error">Can't be blank</div>
+            )}
           </label>
         </div>
 
