@@ -7,6 +7,8 @@ export default function Form({
   setBlankError,
   formatError,
   setFormatError,
+  dateError,
+  setDateError,
 }) {
   const handleChange = (e) => {
     switch (e.target.id) {
@@ -48,10 +50,37 @@ export default function Form({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    let errorObj = {};
 
-    //Error messages onSubmit:
+    // *HANDLE BLANK INPUTS*
     //I didn't use React Form or another library because I wanted to practice my problem solving skills.
+    handleBlankInputs();
+
+    // *HANDLE WRONG FORMAT*
+    // Card number, month, year, and cvc should have numbers only
+    handleWrongFormat();
+
+    // Valid date (e.g. month <= 12)
+    validDate();
+
+    //Restrict MM/YY to 2 digits, restrict CVC to 3 digits
+  };
+
+  function handleWrongFormat() {
+    const numbersOnlyChecks = ["number", "month", "year", "cvc"];
+    let formatErrorObj = {};
+    const formatErrorDuplicate = { ...formatError };
+    numbersOnlyChecks.forEach((element) => {
+      if (!/^\d+$/.test(card[element]) && card[element]) {
+        formatErrorObj = { ...formatErrorObj, [element]: true };
+      }
+    });
+    console.log(formatErrorObj);
+    Object.assign(formatErrorDuplicate, formatErrorObj);
+    setFormatError(formatErrorDuplicate);
+  }
+
+  function handleBlankInputs() {
+    let errorObj = {};
     for (const [key, value] of Object.entries(card)) {
       //If any input field is empty
       if (!value) {
@@ -86,25 +115,13 @@ export default function Form({
     } else {
       setThankYou(!thankYou);
     }
+  }
 
-    //Card number, expiry date, or CVC fields are in the wrong format
-    //Card number, month, year, and cvc should have numbers only
-    const numbersOnlyChecks = ["number", "month", "year", "cvc"];
-    let formatErrorObj = {};
-    const formatErrorDuplicate = { ...formatError };
-    numbersOnlyChecks.forEach((element) => {
-      if (!/^\d+$/.test(card[element]) && card[element]) {
-        formatErrorObj = { ...formatErrorObj, [element]: true };
-      }
-    });
-    console.log(formatErrorObj);
-    Object.assign(formatErrorDuplicate, formatErrorObj);
-    setFormatError(formatErrorDuplicate);
-
-    //Valid date (e.g. month <= 12)
-
-    //Restrict MM/YY to 2 digits, restrict CVC to 3 digits
-  };
+  function validDate() {
+    if (card.month > 12) {
+      setDateError(true);
+    }
+  }
 
   // Apply conditional className if there is an error for a given input field
   const errorConditionalStyling = (str) => {
@@ -147,6 +164,11 @@ export default function Form({
           {blankError.number && (
             <div className="mt-1 text-xs text-red-error">Can't be blank</div>
           )}
+          {formatError.number && (
+            <div className="mt-1 text-xs text-red-error">
+              Wrong format, numbers only
+            </div>
+          )}
         </label>
         <div className="flex mb-5">
           <label htmlFor="date">
@@ -174,6 +196,16 @@ export default function Form({
             {blankError.month || blankError.year ? (
               <div className="mt-1 text-xs text-red-error">Can't be blank</div>
             ) : null}
+            {formatError.month || formatError.year ? (
+              <div className="mt-1 text-xs text-red-error">
+                Wrong format, numbers only
+              </div>
+            ) : null}
+            {dateError && (
+              <div className="mt-1 text-xs text-red-error">
+                Month must be valid
+              </div>
+            )}
           </label>
 
           <label htmlFor="CVC">
@@ -188,6 +220,11 @@ export default function Form({
             />
             {blankError.cvc && (
               <div className="mt-1 text-xs text-red-error">Can't be blank</div>
+            )}
+            {formatError.cvc && (
+              <div className="mt-1 text-xs text-red-error">
+                Wrong format, numbers only
+              </div>
             )}
           </label>
         </div>

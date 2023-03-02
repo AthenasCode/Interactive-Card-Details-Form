@@ -28,6 +28,8 @@ function App() {
     cvc: "",
   });
 
+  const [dateError, setDateError] = useState(false);
+
   const [thankYou, setThankYou] = useState(false);
 
   return (
@@ -63,6 +65,8 @@ function App() {
               setBlankError={setBlankError}
               formatError={formatError}
               setFormatError={setFormatError}
+              dateError={dateError}
+              setDateError={setDateError}
             />
           )}
         </div>
