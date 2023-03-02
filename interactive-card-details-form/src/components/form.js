@@ -61,10 +61,9 @@ export default function Form({
 
     // Valid date (e.g. month <= 12)
     validDate();
-
-    //Restrict MM/YY to 2 digits, restrict CVC to 3 digits
   };
 
+  // there is probably a better way to do this
   function handleWrongFormat() {
     const numbersOnlyChecks = ["number", "month", "year", "cvc"];
     let formatErrorObj = {};
@@ -79,6 +78,7 @@ export default function Form({
     setFormatError(formatErrorDuplicate);
   }
 
+  // priority for refactoring
   function handleBlankInputs() {
     let errorObj = {};
     for (const [key, value] of Object.entries(card)) {
