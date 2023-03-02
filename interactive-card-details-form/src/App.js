@@ -12,7 +12,15 @@ function App() {
     cvc: "",
   });
 
-  const [error, setError] = useState({
+  const [blankError, setBlankError] = useState({
+    number: "",
+    name: "",
+    month: "",
+    year: "",
+    cvc: "",
+  });
+
+  const [formatError, setFormatError] = useState({
     number: "",
     name: "",
     month: "",
@@ -43,7 +51,7 @@ function App() {
         </div>
 
         <div id="background-img" className="col-start-1 col-end-2"></div>
-        <div className="col-start-2 col-end-4 h-full min-w-96 flex flex-col justify-center items-center">
+        <div className="col-start-2 col-end-4 h-full flex flex-col justify-center items-center">
           {thankYou && <ThankYou setThankYou={setThankYou} setCard={setCard} />}
           {!thankYou && (
             <Form
@@ -51,8 +59,10 @@ function App() {
               setCard={setCard}
               thankYou={thankYou}
               setThankYou={setThankYou}
-              error={error}
-              setError={setError}
+              blankError={blankError}
+              setBlankError={setBlankError}
+              formatError={formatError}
+              setFormatError={setFormatError}
             />
           )}
         </div>

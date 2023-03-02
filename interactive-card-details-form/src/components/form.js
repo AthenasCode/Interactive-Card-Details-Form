@@ -1,12 +1,12 @@
-import { useEffect } from "react";
-
 export default function Form({
   setCard,
   card,
   thankYou,
   setThankYou,
-  error,
-  setError,
+  blankError,
+  setBlankError,
+  formatError,
+  setFormatError,
 }) {
   const handleChange = (e) => {
     switch (e.target.id) {
@@ -51,8 +51,9 @@ export default function Form({
     let errorObj = {};
     //Error messages onSubmit:
     //I didn't use React Form or another library because I wanted to practice my problem solving skills.
-    //Any input field is empty
+
     for (const [key, value] of Object.entries(card)) {
+      //If any input field is empty
       if (!value) {
         switch (key) {
           case "name":
@@ -78,14 +79,17 @@ export default function Form({
     }
     //if there is an error and state needs to be updated to reflect that:
     if (errorObj) {
-      let updatedErrorObj = { ...error }; //copy current state to avoid directly updating state without using the setError() function (best practice)
+      let updatedErrorObj = { ...blankError }; //copy current state to avoid directly updating state without using the setError() function (best practice)
       Object.assign(updatedErrorObj, errorObj); //merge the errorObj with copied state (alternative is to change state here using Object.assign(error, errorObj)) - see prev comment
-      setError(updatedErrorObj); //update state
+      setBlankError(updatedErrorObj); //update state
     } else {
       setThankYou(!thankYou);
     }
 
     //Card number, expiry date, or CVC fields are in the wrong format
+    //Numbers only
+    //Valid date (e.g. month <= 12)
+    //Restrict MM/YY to 2 digits, restrict CVC to 3 digits
   };
 
   //apply conditional className if there is an error for a given input field
@@ -104,13 +108,13 @@ export default function Form({
           <br />
           <input
             id="name"
-            className={errorConditionalStyling(error.name) + " w-full"}
+            className={errorConditionalStyling(blankError.name) + " w-full"}
             type="text"
             name="name"
             placeholder="e.g. Jane Appleseed"
             onChange={handleChange}
           />
-          {error.name && (
+          {blankError.name && (
             <div className="mt-1 text-xs text-red-error">Can't be blank</div>
           )}
         </label>
@@ -119,14 +123,14 @@ export default function Form({
           CARD NUMBER
           <br />
           <input
-            className={errorConditionalStyling(error.number) + " w-full"}
+            className={errorConditionalStyling(blankError.number) + " w-full"}
             id="number"
             type="text"
             name="number"
             placeholder="e.g. 1234 5678 9123 0000"
             onChange={handleChange}
           />
-          {error.number && (
+          {blankError.number && (
             <div className="mt-1 text-xs text-red-error">Can't be blank</div>
           )}
         </label>
@@ -134,7 +138,9 @@ export default function Form({
           <label htmlFor="date">
             EXP. DATE (MM/YY) <br />
             <input
-              className={errorConditionalStyling(error.month) + " mr-2 w-20"}
+              className={
+                errorConditionalStyling(blankError.month) + " mr-2 w-20"
+              }
               type="text"
               name="date"
               id="month"
@@ -142,14 +148,16 @@ export default function Form({
               onChange={handleChange}
             />
             <input
-              className={errorConditionalStyling(error.year) + " mr-5 w-20"}
+              className={
+                errorConditionalStyling(blankError.year) + " mr-5 w-20"
+              }
               type="text"
               name="date"
               id="year"
               placeholder="YY"
               onChange={handleChange}
             />
-            {error.month || error.year ? (
+            {blankError.month || blankError.year ? (
               <div className="mt-1 text-xs text-red-error">Can't be blank</div>
             ) : null}
           </label>
@@ -158,13 +166,13 @@ export default function Form({
             CVC <br />
             <input
               type="text"
-              className={errorConditionalStyling(error.cvc)}
+              className={errorConditionalStyling(blankError.cvc)}
               id="cvc"
               name="CVC"
               placeholder="e.g. 123"
               onChange={handleChange}
             />
-            {error.cvc && (
+            {blankError.cvc && (
               <div className="mt-1 text-xs text-red-error">Can't be blank</div>
             )}
           </label>
