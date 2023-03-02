@@ -12,6 +12,14 @@ function App() {
     cvc: "",
   });
 
+  const [error, setError] = useState({
+    number: "",
+    name: "",
+    month: "",
+    year: "",
+    cvc: "",
+  });
+
   const [thankYou, setThankYou] = useState(false);
 
   return (
@@ -43,6 +51,8 @@ function App() {
               setCard={setCard}
               thankYou={thankYou}
               setThankYou={setThankYou}
+              error={error}
+              setError={setError}
             />
           )}
         </div>

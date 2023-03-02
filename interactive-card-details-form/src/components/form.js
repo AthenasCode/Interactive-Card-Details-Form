@@ -1,9 +1,14 @@
-export default function Form({ setCard, card, thankYou, setThankYou }) {
+export default function Form({
+  setCard,
+  card,
+  thankYou,
+  setThankYou,
+  error,
+  setError,
+}) {
   const handleChange = (e) => {
-    console.log(e.target.id);
     switch (e.target.id) {
       case "name":
-        console.log(e.target.value);
         setCard({
           ...card,
           name: e.target.value,
@@ -41,10 +46,43 @@ export default function Form({ setCard, card, thankYou, setThankYou }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setThankYou(!thankYou);
-
+    let errorObj = {};
     //Error messages onSubmit:
+    //I didn't use React Form or another library because I wanted to practice my problem solving skills.
     //Any input field is empty
+    for (const [key, value] of Object.entries(card)) {
+      if (!value) {
+        switch (key) {
+          case "name":
+            errorObj = { ...errorObj, name: true };
+            break;
+          case "number":
+            errorObj = { ...errorObj, number: true };
+            break;
+          case "month":
+            errorObj = { ...errorObj, month: true };
+            break;
+          case "year":
+            errorObj = { ...errorObj, year: true };
+            break;
+          case "cvc":
+            errorObj = { ...errorObj, cvc: true };
+            break;
+          default:
+            console.log("error: default switch");
+            break;
+        }
+      }
+    }
+    //if there is an error and state needs to be updated to reflect that:
+    if (errorObj) {
+      console.log("Error!");
+      let updatedErrorObj = { ...error }; //copy current state to avoid directly updating state without using the setError() function. Not sure if this is necessary but I thought it might be best practice.
+      Object.assign(updatedErrorObj, errorObj); //merge the errorObj with copied state (alternative is to change state here using Object.assign(error, errorObj)) - see prev comment
+      setError(updatedErrorObj); //update state
+    } else {
+      setThankYou(!thankYou);
+    }
 
     //Card number, expiry date, or CVC fields are in the wrong format
   };
@@ -63,6 +101,7 @@ export default function Form({ setCard, card, thankYou, setThankYou }) {
             placeholder="e.g. Jane Appleseed"
             onChange={handleChange}
           />
+          {error.name && <div className="m-1">Can't be blank</div>}
         </label>
 
         <label htmlFor="number">
@@ -76,6 +115,7 @@ export default function Form({ setCard, card, thankYou, setThankYou }) {
             placeholder="e.g. 1234 5678 9123 0000"
             onChange={handleChange}
           />
+          {error.number && <div>Can't be blank</div>}
         </label>
         <div className="flex mb-5">
           <label htmlFor="date">
@@ -88,6 +128,7 @@ export default function Form({ setCard, card, thankYou, setThankYou }) {
               placeholder="MM"
               onChange={handleChange}
             />
+            {error.month && <div>Can't be blank</div>}
             <input
               className="mr-5 w-20"
               type="text"
@@ -96,6 +137,7 @@ export default function Form({ setCard, card, thankYou, setThankYou }) {
               placeholder="YY"
               onChange={handleChange}
             />
+            {error.year && <div>Can't be blank</div>}
           </label>
 
           <label htmlFor="CVC">
@@ -107,6 +149,7 @@ export default function Form({ setCard, card, thankYou, setThankYou }) {
               placeholder="e.g. 123"
               onChange={handleChange}
             />
+            {error.cvc && <div>Can't be blank</div>}
           </label>
         </div>
 

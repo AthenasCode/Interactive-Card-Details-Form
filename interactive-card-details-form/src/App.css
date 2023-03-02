@@ -75,13 +75,14 @@ input {
   border: solid 1px hsl(270, 3%, 87%);
   border-radius: 6px;
   padding: 10px;
-  margin: 2px 0px 20px 0px;
+  margin-top: 2px;
   font-size: 18px;
 }
 
 label {
   color: hsl(278, 68%, 11%);
   font-size: 15px;
+  margin-top: 20px;
 }
 
 #submit-btn {
