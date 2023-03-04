@@ -11,15 +11,19 @@ export default function Form({
   setFormatError,
   dateError,
   setDateError,
+  displayBlank,
+  setDisplayBlank,
 }) {
   const handleChange = (e) => {
     let inputType = e.target.id;
+
     setCard({ ...card, [inputType]: e.target.value });
   };
 
   //display errors on submit
   const onSubmit = (e) => {
     e.preventDefault();
+    setDisplayBlank(true);
     // If there are no blank errors, formatting errors, or date errors, display thankYou component.
     if (
       checkErrors(blankError) &&
@@ -87,7 +91,7 @@ export default function Form({
 
   // Apply conditional className if there is an error for a given input field
   const errorConditionalStyling = (str) => {
-    if (str) {
+    if (str && displayBlank) {
       return "border-solid border-red-error";
     }
     return null;
@@ -107,9 +111,9 @@ export default function Form({
             placeholder="e.g. Jane Appleseed"
             onChange={handleChange}
           />
-          {blankError.name && (
+          {blankError.name && displayBlank ? (
             <div className="mt-1 text-xs text-red-error">Can't be blank</div>
-          )}
+          ) : null}
         </label>
 
         <label htmlFor="number">
@@ -124,9 +128,9 @@ export default function Form({
             onChange={handleChange}
             maxLength="16"
           />
-          {blankError.number && (
+          {blankError.number && displayBlank ? (
             <div className="mt-1 text-xs text-red-error">Can't be blank</div>
-          )}
+          ) : null}
           {formatError.number && (
             <div className="mt-1 text-xs text-red-error">
               Wrong format, numbers only
@@ -158,7 +162,7 @@ export default function Form({
               onChange={handleChange}
               maxLength="2"
             />
-            {blankError.month || blankError.year ? (
+            {(blankError.month || blankError.year) && displayBlank ? (
               <div className="mt-1 text-xs text-red-error">Can't be blank</div>
             ) : null}
             {formatError.month || formatError.year ? (
@@ -184,9 +188,9 @@ export default function Form({
               onChange={handleChange}
               maxLength="3"
             />
-            {blankError.cvc && (
+            {blankError.cvc && displayBlank ? (
               <div className="mt-1 text-xs text-red-error">Can't be blank</div>
-            )}
+            ) : null}
             {formatError.cvc && (
               <div className="mt-1 text-xs text-red-error">
                 Wrong format, numbers only

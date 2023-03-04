@@ -9,6 +9,9 @@ module.exports = {
       "light-violet": "hsl(270, 3%, 87%)",
       "red-error": "hsl(0, 100%, 66%)",
     },
+    boxShadow: {
+      subtle: "0px 0px 40px -30px #21092f",
+    },
   },
   plugins: [],
 };

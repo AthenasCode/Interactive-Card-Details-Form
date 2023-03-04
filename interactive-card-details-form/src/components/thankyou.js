@@ -1,7 +1,13 @@
-export default function ThankYou({ thankYou, setThankYou, setCard }) {
+export default function ThankYou({
+  thankYou,
+  setThankYou,
+  setCard,
+  setDisplayBlank,
+}) {
   const handleClick = (e) => {
     e.preventDefault();
     setThankYou(false); //I wanted to use "!thankYou" here because it seems like best practice, but that doesn't work and I can't figure out why.
+    setDisplayBlank(false);
     setCard({
       number: "",
       name: "",
