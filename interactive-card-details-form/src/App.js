@@ -13,19 +13,19 @@ function App() {
   });
 
   const [blankError, setBlankError] = useState({
-    number: "",
-    name: "",
-    month: "",
+    number: false,
+    name: false,
+    month: false,
     year: "",
     cvc: "",
   });
 
   const [formatError, setFormatError] = useState({
-    number: "",
-    name: "",
-    month: "",
-    year: "",
-    cvc: "",
+    number: false,
+    name: false,
+    month: false,
+    year: false,
+    cvc: false,
   });
 
   const [dateError, setDateError] = useState(false);

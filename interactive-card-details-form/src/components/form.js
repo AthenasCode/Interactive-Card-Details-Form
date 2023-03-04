@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 export default function Form({
   setCard,
   card,
@@ -11,69 +13,50 @@ export default function Form({
   setDateError,
 }) {
   const handleChange = (e) => {
-    switch (e.target.id) {
-      case "name":
-        setCard({
-          ...card,
-          name: e.target.value,
-        });
-        break;
-      case "number":
-        setCard({
-          ...card,
-          number: e.target.value,
-        });
-        break;
-      case "month":
-        setCard({
-          ...card,
-          month: e.target.value,
-        });
-        break;
-      case "year":
-        setCard({
-          ...card,
-          year: e.target.value,
-        });
-        break;
-      case "cvc":
-        setCard({
-          ...card,
-          cvc: e.target.value,
-        });
-        break;
-      default:
-        console.log("error: default switch");
-        break;
+    let inputType = e.target.id;
+    setCard({ ...card, [inputType]: e.target.value });
+  };
+
+  //display errors on submit
+  const onSubmit = (e) => {
+    e.preventDefault();
+    // If there are no blank errors, formatting errors, or date errors, display thankYou component.
+    if (
+      checkErrors(blankError) &&
+      checkErrors(formatError) &&
+      dateError === false
+    ) {
+      setThankYou(true);
     }
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    // *HANDLE BLANK INPUTS*
-    //I didn't use React Form or another library because I wanted to practice my problem solving skills.
+  // Set errors on update of card state and error state
+  useEffect(() => {
     handleBlankInputs();
-
-    // *HANDLE WRONG FORMAT*
-    // Card number, month, year, and cvc should have numbers only
     handleWrongFormat();
-
-    // Valid date (e.g. month <= 12)
     validDate();
-  };
+  }, [card]);
+
+  function checkErrors(obj) {
+    const errorArr = Object.values(obj);
+    const errorCheck = (arr) => arr.every((elem) => elem === false);
+    return errorCheck(errorArr);
+  }
 
   // there is probably a better way to do this
   function handleWrongFormat() {
-    const numbersOnlyChecks = ["number", "month", "year", "cvc"];
+    const numbersOnlyCheck = ["number", "month", "year", "cvc"]; // Name is not included.
     let formatErrorObj = {};
     const formatErrorDuplicate = { ...formatError };
-    numbersOnlyChecks.forEach((element) => {
+    numbersOnlyCheck.forEach((element) => {
+      // Regex check for all numbers: /^\d+$/
+      // If the input in question is not all numbers (and is not blank), set an error (true) for that element.
       if (!/^\d+$/.test(card[element]) && card[element]) {
         formatErrorObj = { ...formatErrorObj, [element]: true };
+      } else {
+        formatErrorObj = { ...formatErrorObj, [element]: false };
       }
     });
-    console.log(formatErrorObj);
     Object.assign(formatErrorDuplicate, formatErrorObj);
     setFormatError(formatErrorDuplicate);
   }
@@ -84,42 +67,21 @@ export default function Form({
     for (const [key, value] of Object.entries(card)) {
       //If any input field is empty
       if (!value) {
-        //switch could probably be tidied similarly to what I did for the formatting errors below.
-        switch (key) {
-          case "name":
-            errorObj = { ...errorObj, name: true };
-            break;
-          case "number":
-            errorObj = { ...errorObj, number: true };
-            break;
-          case "month":
-            errorObj = { ...errorObj, month: true };
-            break;
-          case "year":
-            errorObj = { ...errorObj, year: true };
-            break;
-          case "cvc":
-            errorObj = { ...errorObj, cvc: true };
-            break;
-          default:
-            console.log("error: default switch");
-            break;
-        }
+        errorObj = { ...errorObj, [key]: true };
+      } else {
+        errorObj = { ...errorObj, [key]: false };
       }
     }
-    //if there is an error and state needs to be updated to reflect that:
-    if (errorObj) {
-      let updatedErrorObj = { ...blankError }; //copy current state to avoid directly updating state without using the setError() function (best practice)
-      Object.assign(updatedErrorObj, errorObj); //merge the errorObj with copied state (alternative is to change state here using Object.assign(error, errorObj)) - see prev comment
-      setBlankError(updatedErrorObj); //update state
-    } else {
-      setThankYou(!thankYou);
-    }
+    let updatedErrorObj = { ...blankError }; //copy current state to avoid directly updating state without using the setError() function (best practice)
+    Object.assign(updatedErrorObj, errorObj); //merge the errorObj with copied state (alternative is to change state here using Object.assign(error, errorObj)) - see prev comment
+    setBlankError(updatedErrorObj); //update state
   }
 
   function validDate() {
     if (card.month > 12) {
       setDateError(true);
+    } else {
+      setDateError(false);
     }
   }
 
