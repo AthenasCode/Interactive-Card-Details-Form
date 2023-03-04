@@ -16,8 +16,8 @@ function App() {
     number: false,
     name: false,
     month: false,
-    year: "",
-    cvc: "",
+    year: false,
+    cvc: false,
   });
 
   const [formatError, setFormatError] = useState({
@@ -71,7 +71,7 @@ function App() {
             id="cardback"
             className="relative top-5 shadow-subtle w-[25vw] aspect-[182/100]"
           >
-            <div className="relative top-24 left-80">
+            <div className="relative top-[87px] left-64 text-xs tracking-widest">
               {card.cvc ? card.cvc : "000"}
             </div>
           </div>

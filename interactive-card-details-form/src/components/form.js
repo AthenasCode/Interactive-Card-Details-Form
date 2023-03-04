@@ -16,6 +16,16 @@ export default function Form({
 }) {
   const handleChange = (e) => {
     let inputType = e.target.id;
+    if (inputType === "number") {
+      console.log("changing number");
+      const value = e.target.value
+        .replace(/[^0-9]/gi, "")
+        .replace(/(.{4})/g, "$1 ")
+        .trim();
+      setCard({ ...card, [inputType]: value });
+    } else {
+      setCard({ ...card, [inputType]: e.target.value });
+    }
 
     setCard({ ...card, [inputType]: e.target.value });
   };
@@ -124,6 +134,7 @@ export default function Form({
             id="number"
             type="text"
             name="number"
+            value={card.number}
             placeholder="e.g. 1234 5678 9123 0000"
             onChange={handleChange}
             maxLength="16"

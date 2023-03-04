@@ -607,6 +607,50 @@ video {
   left: 20rem;
 }
 
+.left-72 {
+  left: 18rem;
+}
+
+.left-64 {
+  left: 16rem;
+}
+
+.top-20 {
+  top: 5rem;
+}
+
+.top-16 {
+  top: 4rem;
+}
+
+.top-\[64px\] {
+  top: 64px;
+}
+
+.top-\[68px\] {
+  top: 68px;
+}
+
+.top-\[80px\] {
+  top: 80px;
+}
+
+.top-\[82px\] {
+  top: 82px;
+}
+
+.top-\[84px\] {
+  top: 84px;
+}
+
+.top-\[88px\] {
+  top: 88px;
+}
+
+.top-\[87px\] {
+  top: 87px;
+}
+
 .col-start-1 {
   grid-column-start: 1;
 }
