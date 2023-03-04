@@ -63,12 +63,13 @@ function App() {
             />
           )}
         </div>
-        <div className="absolute z-1 w-2/3 h-full flex flex-col justify-center items-center m-auto col-start-1 col-end-2">
+        <div className="text-white absolute z-1 w-2/3 h-full flex flex-col justify-center items-center m-auto col-start-1 col-end-2">
           <div
             className="relative bottom-5 right-20 shadow-subtle w-[25vw] aspect-[182/100]"
             id="cardfront"
           >
-            <div className="uppercase">
+            <div>Icon</div>
+            <div className="uppercase ">
               {card.number ? card.number : "0000 0000 0000 0000"}
             </div>
             <div className="uppercase">
