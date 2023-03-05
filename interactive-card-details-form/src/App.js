@@ -1,7 +1,7 @@
 import "./App.css";
 import Form from "./components/form";
 import ThankYou from "./components/thankyou";
-import { useState } from "react";
+import { useState, useLayoutEffect } from "react";
 import CardFront from "./components/cardFront";
 import CardBack from "./components/cardBack";
 
@@ -13,7 +13,6 @@ function App() {
     year: "",
     cvc: "",
   });
-
   const [blankError, setBlankError] = useState({
     number: false,
     name: false,
@@ -21,7 +20,6 @@ function App() {
     year: false,
     cvc: false,
   });
-
   const [formatError, setFormatError] = useState({
     number: false,
     name: false,
@@ -29,12 +27,19 @@ function App() {
     year: false,
     cvc: false,
   });
-
   const [dateError, setDateError] = useState(false);
-
   const [thankYou, setThankYou] = useState(false);
-
   const [displayBlank, setDisplayBlank] = useState(false);
+  const [width, setWidth] = useState(0);
+
+  useLayoutEffect(() => {
+    function updateWidth() {
+      setWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", updateWidth);
+    updateWidth();
+    return () => window.removeEventListener("resize", updateWidth);
+  });
 
   return (
     <>
@@ -44,7 +49,7 @@ function App() {
           id="card-div"
           className="text-white absolute w-2/3 h-full flex flex-col justify-center items-center m-auto col-start-1 col-end-2"
         >
-          <CardFront card={card} />
+          <CardFront card={card} width={width} />
           <CardBack card={card} />
         </div>
         <div

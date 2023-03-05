@@ -46,7 +46,7 @@ export default function ThankYou({
       </div>
 
       <h1 className="mb-3 text-xl tracking-widest">THANK YOU!</h1>
-      <p className="text-sm">We've added your card details</p>
+      <p className="text-sm text-gray-violet">We've added your card details</p>
       <button
         className="bg-dark-violet rounded-md py-2 text-white mt-7"
         onClick={handleClick}

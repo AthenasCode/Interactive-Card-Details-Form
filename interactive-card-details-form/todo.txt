@@ -1,5 +1,4 @@
-Responsive styling for < an > 1440px
+Responsive styling for < and > 1440px
 Mobile styling for 375px
 Credit card auto spacing for input field
 Requirement for 3 digit CVC
-Border color for input fields
