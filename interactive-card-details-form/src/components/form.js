@@ -17,7 +17,6 @@ export default function Form({
   const handleChange = (e) => {
     let inputType = e.target.id;
     if (inputType === "number") {
-      console.log("changing number");
       const value = e.target.value
         .replace(/[^0-9]/gi, "")
         .replace(/(.{4})/g, "$1 ")
@@ -108,7 +107,7 @@ export default function Form({
   };
 
   return (
-    <div className="w-[36.8%]">
+    <div className="w-[38%]">
       <form className="h-full w-full min-w-full flex flex-col tracking-widest">
         <label htmlFor="name">
           CARDHOLDER NAME
@@ -219,7 +218,7 @@ export default function Form({
         <button
           type="submit"
           id="submit-btn"
-          className="bg-dark-violet rounded-md py-2"
+          className="bg-dark-violet rounded-md py-2 text-white"
           onClick={onSubmit}
         >
           Confirm
