@@ -109,7 +109,7 @@ export default function Form({
 
   return (
     <div className="w-[36.8%]">
-      <form className="h-full w-full min-w-full flex flex-col">
+      <form className="h-full w-full min-w-full flex flex-col tracking-widest">
         <label htmlFor="name">
           CARDHOLDER NAME
           <br />
@@ -122,11 +122,13 @@ export default function Form({
             onChange={handleChange}
           />
           {blankError.name && displayBlank ? (
-            <div className="mt-1 text-xs text-red-error">Can't be blank</div>
+            <div className="mt-1 text-[13px] tracking-normal text-red-error">
+              Can't be blank
+            </div>
           ) : null}
         </label>
 
-        <label htmlFor="number">
+        <label className="mt-3" htmlFor="number">
           CARD NUMBER
           <br />
           <input
@@ -140,20 +142,22 @@ export default function Form({
             maxLength="16"
           />
           {blankError.number && displayBlank ? (
-            <div className="mt-1 text-xs text-red-error">Can't be blank</div>
+            <div className="mt-1 text-[13px] tracking-normal text-red-error">
+              Can't be blank
+            </div>
           ) : null}
           {formatError.number && (
-            <div className="mt-1 text-xs text-red-error">
+            <div className="mt-1 text-[13px] tracking-normal text-red-error">
               Wrong format, numbers only
             </div>
           )}
         </label>
-        <div className="flex mb-5">
+        <div id="month-year-cvc-div" className="grid grid-cols-2 mb-5 mt-3">
           <label htmlFor="date">
             EXP. DATE (MM/YY) <br />
             <input
               className={
-                errorConditionalStyling(blankError.month) + " mr-2 w-20"
+                errorConditionalStyling(blankError.month) + " mr-2 w-[42%]"
               }
               type="text"
               name="date"
@@ -163,9 +167,7 @@ export default function Form({
               maxLength="2"
             />
             <input
-              className={
-                errorConditionalStyling(blankError.year) + " mr-5 w-20"
-              }
+              className={errorConditionalStyling(blankError.year) + " w-[42%]"}
               type="text"
               name="date"
               id="year"
@@ -174,15 +176,17 @@ export default function Form({
               maxLength="2"
             />
             {(blankError.month || blankError.year) && displayBlank ? (
-              <div className="mt-1 text-xs text-red-error">Can't be blank</div>
+              <div className="mt-1 text-[13px] text-red-error tracking-normal">
+                Can't be blank
+              </div>
             ) : null}
             {formatError.month || formatError.year ? (
-              <div className="mt-1 text-xs text-red-error">
+              <div className="mt-1 text-[13px] text-red-error tracking-normal">
                 Wrong format, numbers only
               </div>
             ) : null}
             {dateError && (
-              <div className="mt-1 text-xs text-red-error">
+              <div className="mt-1 text-[13px] text-red-error tracking-normal">
                 Month must be valid
               </div>
             )}
@@ -192,7 +196,7 @@ export default function Form({
             CVC <br />
             <input
               type="text"
-              className={errorConditionalStyling(blankError.cvc)}
+              className={errorConditionalStyling(blankError.cvc) + " w-full"}
               id="cvc"
               name="CVC"
               placeholder="e.g. 123"
@@ -200,10 +204,12 @@ export default function Form({
               maxLength="3"
             />
             {blankError.cvc && displayBlank ? (
-              <div className="mt-1 text-xs text-red-error">Can't be blank</div>
+              <div className="mt-1 text-[13px] text-red-error tracking-normal">
+                Can't be blank
+              </div>
             ) : null}
             {formatError.cvc && (
-              <div className="mt-1 text-xs text-red-error">
+              <div className="mt-1 text-[13px] text-red-error tracking-normal">
                 Wrong format, numbers only
               </div>
             )}
