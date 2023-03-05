@@ -116,7 +116,7 @@ export default function Form({
             id="name"
             className={
               errorConditionalStyling(blankError.name) +
-              " w-full focus:outline-none focus:ring-1 focus:ring-violet-900"
+              " w-full focus:outline-none focus:border-solid focus:border-violet-900"
             }
             type="text"
             name="name"
@@ -136,7 +136,7 @@ export default function Form({
           <input
             className={
               errorConditionalStyling(blankError.number) +
-              " w-full focus:outline-none focus:ring-1 focus:ring-violet-900"
+              " w-full focus:outline-none focus:border-solid focus:border-violet-900"
             }
             id="number"
             type="text"
@@ -163,7 +163,7 @@ export default function Form({
             <input
               className={
                 errorConditionalStyling(blankError.month) +
-                " mr-2 w-[42%] focus:outline-none focus:ring-1 focus:ring-violet-900"
+                " mr-2 w-[42%] focus:outline-none focus:border-solid focus:border-violet-900"
               }
               type="text"
               name="date"
@@ -175,7 +175,7 @@ export default function Form({
             <input
               className={
                 errorConditionalStyling(blankError.year) +
-                " w-[42%] focus:outline-none focus:ring-1 focus:ring-violet-900"
+                " w-[42%] focus:outline-none focus:border-solid focus:border-violet-900"
               }
               type="text"
               name="date"
@@ -207,7 +207,7 @@ export default function Form({
               type="text"
               className={
                 errorConditionalStyling(blankError.cvc) +
-                " w-full focus:outline-none focus:ring-1 focus:ring-violet-900"
+                " w-full focus:outline-none focus:border-solid focus:border-violet-900"
               }
               id="cvc"
               name="CVC"
