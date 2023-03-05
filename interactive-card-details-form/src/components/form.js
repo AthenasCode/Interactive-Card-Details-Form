@@ -114,7 +114,10 @@ export default function Form({
           <br />
           <input
             id="name"
-            className={errorConditionalStyling(blankError.name) + " w-full"}
+            className={
+              errorConditionalStyling(blankError.name) +
+              " w-full focus:outline-none focus:ring-1 focus:ring-violet-900"
+            }
             type="text"
             name="name"
             placeholder="e.g. Jane Appleseed"
@@ -131,7 +134,10 @@ export default function Form({
           CARD NUMBER
           <br />
           <input
-            className={errorConditionalStyling(blankError.number) + " w-full"}
+            className={
+              errorConditionalStyling(blankError.number) +
+              " w-full focus:outline-none focus:ring-1 focus:ring-violet-900"
+            }
             id="number"
             type="text"
             name="number"
@@ -156,7 +162,8 @@ export default function Form({
             EXP. DATE (MM/YY) <br />
             <input
               className={
-                errorConditionalStyling(blankError.month) + " mr-2 w-[42%]"
+                errorConditionalStyling(blankError.month) +
+                " mr-2 w-[42%] focus:outline-none focus:ring-1 focus:ring-violet-900"
               }
               type="text"
               name="date"
@@ -166,7 +173,10 @@ export default function Form({
               maxLength="2"
             />
             <input
-              className={errorConditionalStyling(blankError.year) + " w-[42%]"}
+              className={
+                errorConditionalStyling(blankError.year) +
+                " w-[42%] focus:outline-none focus:ring-1 focus:ring-violet-900"
+              }
               type="text"
               name="date"
               id="year"
@@ -195,7 +205,10 @@ export default function Form({
             CVC <br />
             <input
               type="text"
-              className={errorConditionalStyling(blankError.cvc) + " w-full"}
+              className={
+                errorConditionalStyling(blankError.cvc) +
+                " w-full focus:outline-none focus:ring-1 focus:ring-violet-900"
+              }
               id="cvc"
               name="CVC"
               placeholder="e.g. 123"
