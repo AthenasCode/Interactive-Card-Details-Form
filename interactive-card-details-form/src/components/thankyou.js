@@ -18,7 +18,7 @@ export default function ThankYou({
   };
 
   return (
-    <div className="flex flex-col justify-center text-center w-[38%]">
+    <div className="flex flex-col justify-center text-center xs:w-[85%] lg:w-[38%]">
       <div className="m-auto mb-4">
         <svg
           viewBox="-10 -10 100 100"
@@ -28,7 +28,7 @@ export default function ThankYou({
           xmlns="http://www.w3.org/2000/svg"
         >
           <circle cx="40" cy="40" r="40" fill="url(#a)" />
-          <path d="M28 39.92 36.08 48l16-16" stroke="#fff" stroke-width="3" />
+          <path d="M28 39.92 36.08 48l16-16" stroke="#fff" strokeWidth="3" />
           <defs>
             <linearGradient
               id="a"
@@ -38,8 +38,8 @@ export default function ThankYou({
               y2="91.507"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#6348FE" />
-              <stop offset="1" stop-color="#610595" />
+              <stop stopColor="#6348FE" />
+              <stop offset="1" stopColor="#610595" />
             </linearGradient>
           </defs>
         </svg>
