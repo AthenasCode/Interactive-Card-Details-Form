@@ -1,9 +1,9 @@
-export default function CardFront({ card, width }) {
+export default function CardFront({ card }) {
   //xs:top-32 xs:right-5
 
   return (
     <div
-      className="relative aspect-[182/100] xs:p-5 lg:p-5 lg:top-0 lg:bottom-5 lg:right-20 shadow-subtle xs:w-[275px] lg:min-w-[350px] lg:max-w-[380px] lg:w-[25vw]"
+      className="relative z-1 aspect-[182/100] xs:p-5 lg:p-5 xs:bottom-16 lg:top-0 lg:bottom-5 lg:right-20 shadow-subtle xs:w-[275px] lg:min-w-[350px] lg:max-w-[380px] lg:w-[25vw]"
       id="cardfront"
     >
       <div>
@@ -21,7 +21,7 @@ export default function CardFront({ card, width }) {
           />
         </svg>
       </div>
-      <div className="uppercase tracking-widest xs:text-md lg:text-xl mt-[12%]">
+      <div className="uppercase tracking-widest xs:text-sm lg:text-xl mt-[12%]">
         {card.number ? card.number : "0000 0000 0000 0000"}
       </div>
       <div

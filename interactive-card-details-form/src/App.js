@@ -43,21 +43,23 @@ function App() {
 
   return (
     <>
-      <div className="xs:grid-rows-3 lg:grid-rows-none lg:grid-cols-3 h-full grid ">
+      <div className="relative xs:grid-rows-3 lg:grid-rows-none lg:grid-cols-3 h-full grid ">
         <div
           id="background-img"
-          className=" xs:row-start-1 xs:row-end-2 lg:col-start-1 lg:col-end-2"
+          className="relative z-1 xs:row-start-1 xs:row-end-2 lg:col-start-1 lg:col-end-2"
         ></div>
+
         <div
           id="card-div"
-          className="xs:w-full xs:h-1/3 lg:w-2/3 lg:h-full lg:col-start-1 lg:col-end-2 text-white absolute flex flex-col justify-center items-center m-auto "
+          className="text-white absolute z-2 xs:max-w-[500px] lg:max-w-full xs:w-full lg:w-2/3 lg:h-full xs:p-5 xs:ml-auto xs:mr-auto xs:grid xs:grid-cols-1 xs:grid-rows-2 lg:flex lg:flex-col lg:justify-center lg:items-center"
         >
-          <CardFront className="relative z-2" card={card} width={width} />
-          <CardBack className="relative z-1" card={card} />
+          <CardFront className="z-1" card={card} width={width} />
+          <CardBack className="z-2" card={card} />
         </div>
+
         <div
           id="ty-and-form-div"
-          className="xs:row-start-2 xs:row-end-4 lg:row-auto lg:col-start-2 lg:col-end-4 h-full flex flex-col justify-center items-center"
+          className="relative z-3 xs:row-start-2 xs:row-end-4 lg:row-auto lg:col-start-2 lg:col-end-4 h-full flex flex-col justify-center items-center"
         >
           {thankYou && (
             <ThankYou
