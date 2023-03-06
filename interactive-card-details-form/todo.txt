@@ -1,4 +1,2 @@
 Credit card auto spacing for input field
 Requirement for 3 digit CVC
-placeholder text color needs to be lighter grey
-bold labels
