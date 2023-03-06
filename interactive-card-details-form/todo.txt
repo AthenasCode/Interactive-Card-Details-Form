@@ -1,5 +1,3 @@
-Responsive styling for < and > 1440px
-Mobile styling for 375px
+Responsive styling for 375-1000
 Credit card auto spacing for input field
 Requirement for 3 digit CVC
-Add max size to cards to help with resposnive design***

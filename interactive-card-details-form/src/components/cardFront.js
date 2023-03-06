@@ -1,7 +1,9 @@
 export default function CardFront({ card, width }) {
+  //xs:top-32 xs:right-5
+
   return (
     <div
-      className="relative bottom-5 right-20 shadow-subtle w-[25vw] min-w-[300px] max-w-[380px] aspect-[182/100] p-5 flex flex-col"
+      className="relative aspect-[182/100] xs:p-5 lg:p-5 lg:top-0 lg:bottom-5 lg:right-20 shadow-subtle xs:w-[275px] lg:min-w-[350px] lg:max-w-[380px] lg:w-[25vw]"
       id="cardfront"
     >
       <div>
@@ -19,12 +21,12 @@ export default function CardFront({ card, width }) {
           />
         </svg>
       </div>
-      <div className="uppercase tracking-widest text-xl mt-[12%]">
+      <div className="uppercase tracking-widest xs:text-md lg:text-xl mt-[12%]">
         {card.number ? card.number : "0000 0000 0000 0000"}
       </div>
       <div
         id="name-and-date"
-        className="flex text-sm justify-between tracking-widest mt-[5%]"
+        className="flex xs:text-[10px] lg:text-sm justify-between tracking-widest mt-[5%]"
       >
         <div className="uppercase">
           {card.name ? card.name : "Jane Appleseed"}

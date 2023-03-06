@@ -107,7 +107,7 @@ export default function Form({
   };
 
   return (
-    <div className="w-[38%]">
+    <div className="xs:w-full xs:max-w-[500px] xs:p-5 lg:w-[38%]">
       <form className="h-full w-full min-w-full flex flex-col tracking-widest">
         <label htmlFor="name">
           CARDHOLDER NAME

@@ -43,18 +43,21 @@ function App() {
 
   return (
     <>
-      <div className="h-full grid grid-cols-3">
-        <div id="background-img" className="col-start-1 col-end-2"></div>
+      <div className="xs:grid-rows-3 lg:grid-rows-none lg:grid-cols-3 h-full grid ">
+        <div
+          id="background-img"
+          className=" xs:row-start-1 xs:row-end-2 lg:col-start-1 lg:col-end-2"
+        ></div>
         <div
           id="card-div"
-          className="text-white absolute w-2/3 h-full flex flex-col justify-center items-center m-auto col-start-1 col-end-2"
+          className="xs:w-full xs:h-1/3 lg:w-2/3 lg:h-full lg:col-start-1 lg:col-end-2 text-white absolute flex flex-col justify-center items-center m-auto "
         >
-          <CardFront card={card} width={width} />
-          <CardBack card={card} />
+          <CardFront className="relative z-2" card={card} width={width} />
+          <CardBack className="relative z-1" card={card} />
         </div>
         <div
           id="ty-and-form-div"
-          className="relative z-1000 col-start-2 col-end-4 h-full flex flex-col justify-center items-center"
+          className="xs:row-start-2 xs:row-end-4 lg:row-auto lg:col-start-2 lg:col-end-4 h-full flex flex-col justify-center items-center"
         >
           {thankYou && (
             <ThankYou
