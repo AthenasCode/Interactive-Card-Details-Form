@@ -1,2 +1,1 @@
-Credit card auto spacing for input field
 Requirement for 3 digit CVC

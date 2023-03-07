@@ -30,6 +30,8 @@ function App() {
   const [dateError, setDateError] = useState(false);
   const [thankYou, setThankYou] = useState(false);
   const [displayBlank, setDisplayBlank] = useState(false);
+  const [cvcShort, setCvcShort] = useState(false);
+  const [numberShort, setNumberShort] = useState(false);
 
   return (
     <>
@@ -72,6 +74,10 @@ function App() {
               setDateError={setDateError}
               displayBlank={displayBlank}
               setDisplayBlank={setDisplayBlank}
+              cvcShort={cvcShort}
+              setCvcShort={setCvcShort}
+              numberShort={numberShort}
+              setNumberShort={setNumberShort}
             />
           )}
         </div>

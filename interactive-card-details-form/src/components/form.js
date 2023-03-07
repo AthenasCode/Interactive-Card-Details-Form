@@ -13,20 +13,22 @@ export default function Form({
   setDateError,
   displayBlank,
   setDisplayBlank,
+  cvcShort,
+  setCvcShort,
+  numberShort,
+  setNumberShort,
 }) {
   const handleChange = (e) => {
     let inputType = e.target.id;
     if (inputType === "number") {
       const value = e.target.value
-        .replace(/[^0-9]/gi, "")
-        .replace(/(.{4})/g, "$1 ")
+        .replace(/[^0-9]/gi, "") //match all non-numbers, replace with "" (don't allow letter input at all)
+        .replace(/(.{4})/g, "$1 ") //match four of any character except line breaks (eg "1234"), replace with those same four + " "
         .trim();
       setCard({ ...card, [inputType]: value });
     } else {
       setCard({ ...card, [inputType]: e.target.value });
     }
-
-    setCard({ ...card, [inputType]: e.target.value });
   };
 
   //display errors on submit
@@ -37,6 +39,8 @@ export default function Form({
     if (
       checkErrors(blankError) &&
       checkErrors(formatError) &&
+      cvcShort === false &&
+      numberShort === false &&
       dateError === false
     ) {
       setThankYou(true);
@@ -48,6 +52,8 @@ export default function Form({
     handleBlankInputs();
     handleWrongFormat();
     validDate();
+    handleCvcTooShort();
+    handleNumberTooShort();
   }, [card]);
 
   function checkErrors(obj) {
@@ -58,7 +64,7 @@ export default function Form({
 
   // there is probably a better way to do this
   function handleWrongFormat() {
-    const numbersOnlyCheck = ["number", "month", "year", "cvc"]; // Name is not included.
+    const numbersOnlyCheck = ["month", "year", "cvc"]; // Name is not included.
     let formatErrorObj = {};
     const formatErrorDuplicate = { ...formatError };
     numbersOnlyCheck.forEach((element) => {
@@ -72,6 +78,22 @@ export default function Form({
     });
     Object.assign(formatErrorDuplicate, formatErrorObj);
     setFormatError(formatErrorDuplicate);
+  }
+
+  function handleCvcTooShort() {
+    if (card.cvc.length < 3) {
+      setCvcShort(true);
+    } else {
+      setCvcShort(false);
+    }
+  }
+
+  function handleNumberTooShort() {
+    if (card.number.length < 19) {
+      setNumberShort(true);
+    } else {
+      setNumberShort(false);
+    }
   }
 
   // priority for refactoring
@@ -144,7 +166,7 @@ export default function Form({
             value={card.number}
             placeholder="e.g. 1234 5678 9123 0000"
             onChange={handleChange}
-            maxLength="16"
+            maxLength="19"
           />
           {blankError.number && displayBlank ? (
             <div className="mt-1 text-[13px] tracking-normal text-red-error">
@@ -156,9 +178,14 @@ export default function Form({
               Wrong format, numbers only
             </div>
           )}
+          {numberShort && displayBlank ? (
+            <div className="mt-1 text-[13px] text-red-error tracking-normal">
+              Number must be 16 digits
+            </div>
+          ) : null}
         </label>
         <div id="month-year-cvc-div" className="grid grid-cols-2 mb-5 mt-3">
-          <label htmlFor="date">
+          <label htmlFor="month">
             EXP. DATE (MM/YY) <br />
             <input
               className={
@@ -172,6 +199,9 @@ export default function Form({
               onChange={handleChange}
               maxLength="2"
             />
+            <label htmlFor="year" className="sr-only">
+              Year
+            </label>
             <input
               className={
                 errorConditionalStyling(blankError.year) +
@@ -225,6 +255,11 @@ export default function Form({
                 Wrong format, numbers only
               </div>
             )}
+            {cvcShort && displayBlank ? (
+              <div className="mt-1 text-[13px] text-red-error tracking-normal">
+                CVC must be three digits
+              </div>
+            ) : null}
           </label>
         </div>
 
