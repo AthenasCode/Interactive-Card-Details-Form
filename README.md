@@ -1,6 +1,6 @@
 ﻿# Interactive Card Details Form | Junior Frontend Mentor Challenge
  
- The challenge: https://www.frontendmentor.io/challenges/interactive-card-details-form-XpS8cKZDWw
+ The challenge: https://www.frontendmentor.io/challenges/interactive-card-details-form-XpS8cKZDWw  
  View my solution: https://athenascode.github.io/Interactive-Card-Details-Form/
  
  
